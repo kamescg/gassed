@@ -1,4 +1,4 @@
-## Getting Started
+## Gassed | Fuel Web Application
 
 First, run the development server:
 

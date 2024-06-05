@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply border-0 px-3 py-3 placeholder-neutral-400 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150;
+}
+
+.gradient {
+  position: absolute;
+  mix-blend-mode: normal;
+  will-change: filter;
+  pointer-events: none;
+}
+
+.gradientSmall {
+  filter: blur(32px);
+}
+
+.gradientLarge {
+  filter: blur(75px);
+}
+
+.glowConic {
+  background-image: var(--glow-conic);
+}
+
+.logoGradientContainer {
+  display: flex;
+  position: absolute;
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+  height: 16rem;
+}
+
+.logoGradient {
+  opacity: 0.9;
+  width: 120px;
+  height: 120px;
+}
+
+.backgroundGradient {
+  top: -500px;
+  width: 1000px;
+  height: 1000px;
+  opacity: 0.15;
+}
