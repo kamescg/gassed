@@ -3,17 +3,23 @@ import { Button } from "@/components/ui/button";
 import React, { useState } from "react"
 import { CounterAbi, CounterAbi__factory } from '@gassed/contracts/sway-api' 
 import ContractIds from '@gassed/contracts/sway-api/contract-ids.json' 
+import { contractDeployments, getContractId } from '@gassed/contract-deployments/src' 
 import { bn } from "fuels";
-import { useWallet } from "@fuels/react";
+import { useChain, useConnect, useConnectors, useWallet } from "@fuels/react";
 
 export default function CounterPage(): JSX.Element {
+    const { chain } = useChain()
+    const { context } = useConnect();
     const { wallet } = useWallet();
     const [contract, setContract] = useState<CounterAbi>();
     const [counter, setCounter] = React.useState(0)
 
+    console.log(context, 'context')
+    console.log(chain, 'chain')
+
     React.useEffect(() => {
         if(!wallet) return;
-        const testContract = CounterAbi__factory.connect(ContractIds.counter, wallet);
+        const testContract = CounterAbi__factory.connect(getContractId("counter", chain?.name), wallet);
         setContract(testContract);
         testContract.functions.get_count().get().then(({ value }) => {
             setCounter(value.toNumber());
@@ -21,9 +27,10 @@ export default function CounterPage(): JSX.Element {
     }, [wallet])
 
     const handleIncrement = async () => {
-        if(!contract) alert('Contract not loaded');
-        const { value } = await contract.functions.increment_counter(bn(1)).call();
-        setCounter(value.toNumber());
+        if(contract?.functions) {
+          const { value } = await contract.functions.increment_counter(bn(1)).call();
+          setCounter(value.toNumber());
+        }
     }
 
   return (

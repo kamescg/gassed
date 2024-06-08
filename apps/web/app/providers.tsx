@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { defaultConnectors } from "@fuels/connectors"
 import { FuelProvider } from "@fuels/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ThemeProvider } from "next-themes"
+import { fuelConnectors } from "@/lib/config/fuel-connectors"
 
 type Providers = React.HTMLAttributes<HTMLElement>
 
@@ -20,7 +20,7 @@ const Providers = ({ children }: Providers) => {
     >
       <QueryClientProvider client={queryClient}>
         <FuelProvider
-          fuelConfig={{ connectors: defaultConnectors({ devMode: true }) }}
+          fuelConfig={{ connectors: fuelConnectors }}
         >
           {children}
         </FuelProvider>
