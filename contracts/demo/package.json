@@ -4,7 +4,6 @@
   "private": true,
   "output": "sway-api",
   "scripts": {
-    "build": "forc build",
     "dev": "fuels dev",
     "version": "fuels -v"
   },
